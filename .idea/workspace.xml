@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="80b40a67-aa50-4c0c-80c4-35aa90003794" name="Default" comment="" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <expand />
+    <select />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="ejercicio1" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="ReciprocalArraySum.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ReciprocalArraySum.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1530">
+              <caret line="90" column="46" lean-forward="false" selection-start-line="90" selection-start-column="46" selection-end-line="90" selection-end-column="46" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4921#4922#0" expanded="true" />
+                <element signature="e#4957#4958#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="util" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/util">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="183">
+              <caret line="173" column="36" lean-forward="false" selection-start-line="173" selection-start-column="36" selection-end-line="173" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReciprocalArraySumTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ReciprocalArraySumTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="34" column="38" lean-forward="true" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#512#513#0" expanded="true" />
+                <element signature="e#544#545#0" expanded="true" />
+                <element signature="e#574#575#0" expanded="true" />
+                <element signature="e#600#601#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>import java\.util\.Arrays\;\nimport java\.util\.concurrent\.ForkJoinPool\;\nimport java\.util\.concurrent\.RecursiveAction\;\n\n\/\*\*\n \* Clase que contiene los métodos para implementar la suma de los recíprocos de un arreglo usando paralelismo\.\n \*\/\npublic final class ReciprocalArraySum \{\n\n    \/\*\*\n     \* Constructor\.\n     \*\/\n    private ReciprocalArraySum\(\) \{\n    \}\n\n    \/\*\*\n     \* Calcula secuencialmente la suma de valores recíprocos para un arreglo\.\n     \*\n     \* \@param input Arreglo de entrada\n     \* \@return La suma de los recíprocos del arreglo de entrada\n     \*\/\n    protected static double seqArraySum\(final double\[\] input\) \{\n        double sum \= 0\;\n\n        \/\/ Calcula la suma de los recíprocos de los elementos del arreglo\n        for \(int i \= 0\; i \&lt; input\.length\; i\+\+\) \{\n            sum \+\= 1 \/ input\[i\]\;\n        \}\n\n        return sum\;\n    \}\n\n    \/\*\*\n     \* calcula el tamaño de cada trozo o sección\, de acuerdo con el número de secciones para crear\n     \* a través de un número dado de elementos\.\n     \*\n     \* \@param nChunks El número de secciones \(chunks\) para crear\n     \* \@param nElements El número de elementos para dividir\n     \* \@return El tamaño por defecto de la sección \(chunk\)\n     \*\/\n    private static int getChunkSize\(final int nChunks\, final int nElements\) \{\n        \/\/ Función techo entera\n        return \(nElements \+ nChunks \- 1\) \/ nChunks\;\n    \}\n\n    \/\*\*\n     \* Calcula el índice del elemento inclusivo donde la sección\/trozo \(chunk\) inicia\,\n     \* dado que hay cierto número de secciones\/trozos \(chunks\)\.\n     \*\n     \* \@param chunk la sección\/trozo \(chunk\) para cacular la posición de inicio\n     \* \@param nChunks Cantidad de seciiones\/trozos \(chunks\) creados\n     \* \@param nElements La cantidad de elementos de la sección\/trozo que debe atravesarse\n     \* \@return El indice inclusivo donde esta sección\/trozo \(chunk\) inicia en el conjunto de\n     \*         nElements\n     \*\/\n    private static int getChunkStartInclusive\(final int chunk\,\n                                              final int nChunks\, final int nElements\) \{\n        final int chunkSize \= getChunkSize\(nChunks\, nElements\)\;\n        return chunk \* chunkSize\;\n    \}\n\n    \/\*\*\n     \* Calcula el índice del elemento exclusivo que es proporcionado al final de la sección\/trozo \(chunk\)\,\n     \* dado que hay cierto número de secciones\/trozos \(chunks\)\.\n     \*\n     \* \@param chunk LA sección para calcular donde termina\n     \* \@param nChunks Cantidad de seciiones\/trozos \(chunks\) creados\n     \* \@param nElements La cantidad de elementos de la sección\/trozo que debe atravesarse\n     \* \@return El índice de terminación exclusivo para esta sección\/trozo \(chunk\)\n     \*\/\n    private static int getChunkEndExclusive\(final int chunk\, final int nChunks\,\n                                            final int nElements\) \{\n        final int chunkSize \= getChunkSize\(nChunks\, nElements\)\;\n        final int end \= \(chunk \+ 1\) \* chunkSize\;\n        if \(end \&gt; nElements\) \{\n            return nElements\;\n        \} else \{\n            return end\;\n        \}\n    \}\n\n    \/\*\*\n     \* Este pedazo de clase puede ser completada para para implementar el cuerpo de cada tarea creada\n     \* para realizar la suma de los recíprocos del arreglo en paralelo\.\n     \*\/\n    private static class ReciprocalArraySumTask extends RecursiveAction \{\n        \/\*\*\n         \* Iniciar el índice para el recorrido transversal hecho por esta tarea\.\n         \*\/\n        private final int startIndexInclusive\;\n        \/\*\*\n         \* Concluir el índice para el recorrido transversal hecho por esta tarea\.\n         \*\/\n        private final int endIndexExclusive\;\n        \/\*\*\n         \* Arreglo de entrada para la suma de recíprocos\.\n         \*\/\n        private final double\[\] input\;\n        \/\*\*\n         \* Valor intermedio producido por esta tarea\.\n         \*\/\n        private double value\;\n\n        \/\*\*\n         \* Constructor\.\n         \* \@param setStartIndexInclusive establece el indice inicial para comenzar\n         \*        el recorrido trasversal\.\n         \* \@param setEndIndexExclusive establece el indice final para el recorrido trasversal\.\n         \* \@param setInput Valores de entrada\n         \*\/\n        ReciprocalArraySumTask\(final int setStartIndexInclusive\,\n                               final int setEndIndexExclusive\, final double\[\] setInput\) \{\n            this\.startIndexInclusive \= setStartIndexInclusive\;\n            this\.endIndexExclusive \= setEndIndexExclusive\;\n            this\.input \= setInput\;\n        \}\n\n        \/\*\*\n         \* Adquiere el valor producido por esta tarea\.\n         \* \@return El valor producido por esta tarea\n         \*\/\n        public double getValue\(\) \{\n            return value\;\n        \}\n\n        \@Override\n        protected void compute\(\) \{\n            \/\/ Para hacer\n            if\( input\.length \&lt; 2 \)\{\n                parArraySum\(input\)\;\n            \} else \{\n                int n \= input\.length\;\n                int mid \= \(n\-1\)\/2\;\n                double arr1\[\] \= Arrays\.copyOfRange\(input\, 0\, mid\)\;\n                double arr2\[\] \= Arrays\.copyOfRange\(input\, mid\, n\)\;\n\n                ReciprocalArraySumTask sum1 \= new ReciprocalArraySumTask\(0\, 0\, arr1 \)\;\n                ReciprocalArraySumTask sum2 \= new ReciprocalArraySumTask\(0\, 0\, arr2 \)\;\n\n                invokeAll\( sum1\, sum2 \)\;\n            \}\n        \}\n    \}\n\n    \/\*\*\n     \* Para hacer\: Modificar este método para calcular la misma suma de recíprocos como le realizada en\n     \* seqArraySum\, pero utilizando dos tareas ejecutándose en paralelo dentro del framework ForkJoin de Java\n     \* Se puede asumir que el largo del arreglo de entrada\n     \* es igualmente divisible por 2\.\n     \*\n     \* \@param input Arreglo de entrada\n     \* \@return La suma de los recíprocos del arreglo de entrada\n     \*\/\n    protected static double parArraySum\(final double\[\] input\) \{\n        assert input\.length \% 2 \=\= 0\;\n\n        double sum \= 0\;\n\n        \/\/ Calcula la suma de los recíprocos de los elementos del arreglo\n        for \(int i \= 0\; i \&lt; input\.length\; i\+\+\) \{\n            sum \+\= 1 \/ input\[i\]\;\n        \}\n\n        return sum\;\n    \}\n\n    \/\*\*\n     \* Para hacer\: extender el trabajo hecho para implementar parArraySum que permita utilizar un número establecido\n     \* de tareas para calcular la suma del arreglo recíproco\.\n     \* getChunkStartInclusive y getChunkEndExclusive pueden ser útiles para cacular\n     \* el rango de elementos indice que pertenecen a cada sección\/trozo \(chunk\)\.\n     \*\n     \* \@param input Arreglo de entrada\n     \* \@param numTasks El número de tareas para crear\n     \* \@return La suma de los recíprocos del arreglo de entrada\n     \*\/\n    protected static double parManyTaskArraySum\(final double\[\] input\,\n                                                final int numTasks\) \{\n        double sum \= 0\;\n\n        \/\/ Calcula la suma de los recíprocos de los elementos del arreglo\n        for \(int i \= 0\; i \&lt; input\.length\; i\+\+\) \{\n            sum \+\= 1 \/ input\[i\]\;\n        \}\n\n        return sum\;\n    \}\n\n    public static void main \(String args\[\]\)\{\n        System\.out\.println\(\&quot;Test\&quot;\)\;\n        double\[\] input \= \{1\,2\,3\,4\}\;\n        System\.out\.println\(Arrays\.toString\(input\)\)\;\n        ForkJoinPool pool \= new ForkJoinPool\(\)\;\n        ReciprocalArraySumTask sum \= new ReciprocalArraySumTask\(0\,0\, input\)\;\n        pool\.invoke\( sum \)\;\n    \}\n\}|import java\.util\.Arrays\;\nimport java\.util\.concurrent\.ForkJoinPool\;\nimport java\.util\.concurrent\.RecursiveAction\;\n\n\/\*\*\n \* Clase que contiene los métodos para implementar la suma de los recíprocos de un arreglo usando paralelismo\.\n \*\/\npublic final class ReciprocalArraySum \{\n\n    \/\*\*\n     \* Constructor\.\n     \*\/\n    private ReciprocalArraySum\(\) \{\n    \}\n\n    \/\*\*\n     \* Calcula secuencialmente la suma de valores recíprocos para un arreglo\.\n     \*\n     \* \@param input Arreglo de entrada\n     \* \@return La suma de los recíprocos del arreglo de entrada\n     \*\/\n    protected static double seqArraySum\(final double\[\] input\) \{\n        double sum \= 0\;\n\n        \/\/ Calcula la suma de los recíprocos de los elementos del arreglo\n        for \(int i \= 0\; i \&lt; input\.length\; i\+\+\) \{\n            sum \+\= 1 \/ input\[i\]\;\n        \}\n\n        return sum\;\n    \}\n\n    \/\*\*\n     \* calcula el tamaño de cada trozo o sección\, de acuerdo con el número de secciones para crear\n     \* a través de un número dado de elementos\.\n     \*\n     \* \@param nChunks El número de secciones \(chunks\) para crear\n     \* \@param nElements El número de elementos para dividir\n     \* \@return El tamaño por defecto de la sección \(chunk\)\n     \*\/\n    private static int getChunkSize\(final int nChunks\, final int nElements\) \{\n        \/\/ Función techo entera\n        return \(nElements \+ nChunks \- 1\) \/ nChunks\;\n    \}\n\n    \/\*\*\n     \* Calcula el índice del elemento inclusivo donde la sección\/trozo \(chunk\) inicia\,\n     \* dado que hay cierto número de secciones\/trozos \(chunks\)\.\n     \*\n     \* \@param chunk la sección\/trozo \(chunk\) para cacular la posición de inicio\n     \* \@param nChunks Cantidad de seciiones\/trozos \(chunks\) creados\n     \* \@param nElements La cantidad de elementos de la sección\/trozo que debe atravesarse\n     \* \@return El indice inclusivo donde esta sección\/trozo \(chunk\) inicia en el conjunto de\n     \*         nElements\n     \*\/\n    private static int getChunkStartInclusive\(final int chunk\,\n                                              final int nChunks\, final int nElements\) \{\n        final int chunkSize \= getChunkSize\(nChunks\, nElements\)\;\n        return chunk \* chunkSize\;\n    \}\n\n    \/\*\*\n     \* Calcula el índice del elemento exclusivo que es proporcionado al final de la sección\/trozo \(chunk\)\,\n     \* dado que hay cierto número de secciones\/trozos \(chunks\)\.\n     \*\n     \* \@param chunk LA sección para calcular donde termina\n     \* \@param nChunks Cantidad de seciiones\/trozos \(chunks\) creados\n     \* \@param nElements La cantidad de elementos de la sección\/trozo que debe atravesarse\n     \* \@return El índice de terminación exclusivo para esta sección\/trozo \(chunk\)\n     \*\/\n    private static int getChunkEndExclusive\(final int chunk\, final int nChunks\,\n                                            final int nElements\) \{\n        final int chunkSize \= getChunkSize\(nChunks\, nElements\)\;\n        final int end \= \(chunk \+ 1\) \* chunkSize\;\n        if \(end \&gt; nElements\) \{\n            return nElements\;\n        \} else \{\n            return end\;\n        \}\n    \}\n\n    \/\*\*\n     \* Este pedazo de clase puede ser completada para para implementar el cuerpo de cada tarea creada\n     \* para realizar la suma de los recíprocos del arreglo en paralelo\.\n     \*\/\n    private static class ReciprocalArraySumTask extends RecursiveAction \{\n        \/\*\*\n         \* Iniciar el índice para el recorrido transversal hecho por esta tarea\.\n         \*\/\n        private final int startIndexInclusive\;\n        \/\*\*\n         \* Concluir el índice para el recorrido transversal hecho por esta tarea\.\n         \*\/\n        private final int endIndexExclusive\;\n        \/\*\*\n         \* Arreglo de entrada para la suma de recíprocos\.\n         \*\/\n        private final double\[\] input\;\n        \/\*\*\n         \* Valor intermedio producido por esta tarea\.\n         \*\/\n        private double value\;\n\n        \/\*\*\n         \* Constructor\.\n         \* \@param setStartIndexInclusive establece el indice inicial para comenzar\n         \*        el recorrido trasversal\.\n         \* \@param setEndIndexExclusive establece el indice final para el recorrido trasversal\.\n         \* \@param setInput Valores de entrada\n         \*\/\n        ReciprocalArraySumTask\(final int setStartIndexInclusive\,\n                               final int setEndIndexExclusive\, final double\[\] setInput\) \{\n            this\.startIndexInclusive \= setStartIndexInclusive\;\n            this\.endIndexExclusive \= setEndIndexExclusive\;\n            this\.input \= setInput\;\n        \}\n\n        \/\*\*\n         \* Adquiere el valor producido por esta tarea\.\n         \* \@return El valor producido por esta tarea\n         \*\/\n        public double getValue\(\) \{\n            return value\;\n        \}\n\n        \@Override\n        protected void compute\(\) \{\n            \/\/ Para hacer\n            if\( input\.length \&lt; 2 \)\{\n                parArraySum\(input\)\;\n            \} else \{\n                int n \= input\.length\;\n                int mid \= \(n\-1\)\/2\;\n                double arr1\[\] \= Arrays\.copyOfRange\(input\, 0\, mid\)\;\n                double arr2\[\] \= Arrays\.copyOfRange\(input\, mid\, n\)\;\n\n                ReciprocalArraySumTask sum1 \= new ReciprocalArraySumTask\(0\, 0\, arr1 \)\;\n                ReciprocalArraySumTask sum2 \= new ReciprocalArraySumTask\(0\, 0\, arr2 \)\;\n\n                invokeAll\( sum1\, sum2 \)\;\n            \}\n        \}\n    \}\n\n    \/\*\*\n     \* Para hacer\: Modificar este método para calcular la misma suma de recíprocos como le realizada en\n     \* seqArraySum\, pero utilizando dos tareas ejecutándose en paralelo dentro del framework ForkJoin de Java\n     \* Se puede asumir que el largo del arreglo de entrada\n     \* es igualmente divisible por 2\.\n     \*\n     \* \@param input Arreglo de entrada\n     \* \@return La suma de los recíprocos del arreglo de entrada\n     \*\/\n    protected static double parArraySum\(final double\[\] input\) \{\n        assert input\.length \% 2 \=\= 0\;\n\n        double sum \= 0\;\n\n        \/\/ Calcula la suma de los recíprocos de los elementos del arreglo\n        for \(int i \= 0\; i \&lt; input\.length\; i\+\+\) \{\n            sum \+\= 1 \/ input\[i\]\;\n        \}\n\n        return sum\;\n    \}\n\n    \/\*\*\n     \* Para hacer\: extender el trabajo hecho para implementar parArraySum que permita utilizar un número establecido\n     \* de tareas para calcular la suma del arreglo recíproco\.\n     \* getChunkStartInclusive y getChunkEndExclusive pueden ser útiles para cacular\n     \* el rango de elementos indice que pertenecen a cada sección\/trozo \(chunk\)\.\n     \*\n     \* \@param input Arreglo de entrada\n     \* \@param numTasks El número de tareas para crear\n     \* \@return La suma de los recíprocos del arreglo de entrada\n     \*\/\n    protected static double parManyTaskArraySum\(final double\[\] input\,\n                                                final int numTasks\) \{\n        double sum \= 0\;\n\n        \/\/ Calcula la suma de los recíprocos de los elementos del arreglo\n        for \(int i \= 0\; i \&lt; input\.length\; i\+\+\) \{\n            sum \+\= 1 \/ input\[i\]\;\n        \}\n\n        return sum\;\n    \}\n\n    public static void main \(String args\[\]\)\{\n        System\.out\.println\(\&quot;Test\&quot;\)\;\n        double\[\] input \= \{1\,2\,3\,4\}\;\n        System\.out\.println\(Arrays\.toString\(input\)\)\;\n        ForkJoinPool pool \= new ForkJoinPool\(\)\;\n        ReciprocalArraySumTask sum \= new ReciprocalArraySumTask\(0\,0\, input\)\;\n        pool\.invoke\( sum \)\;\n    \}\n\}|import java\.util\.Arrays\;\nimport java\.util\.concurrent\.ForkJoinPool\;\nimport java\.util\.concurrent\.RecursiveAction\;\n\n\/\*\*\n \* Clase que contiene los métodos para implementar la suma de los recíprocos de un arreglo usando paralelismo\.\n \*\/\npublic final class ReciprocalArraySum \{\n\n    \/\*\*\n     \* Constructor\.\n     \*\/\n    private ReciprocalArraySum\(\) \{\n    \}\n\n    \/\*\*\n     \* Calcula secuencialmente la suma de valores recíprocos para un arreglo\.\n     \*\n     \* \@param input Arreglo de entrada\n     \* \@return La suma de los recíprocos del arreglo de entrada\n     \*\/\n    protected static double seqArraySum\(final double\[\] input\) \{\n        double sum \= 0\;\n\n        \/\/ Calcula la suma de los recíprocos de los elementos del arreglo\n        for \(int i \= 0\; i \&lt; input\.length\; i\+\+\) \{\n            sum \+\= 1 \/ input\[i\]\;\n        \}\n\n        return sum\;\n    \}\n\n    \/\*\*\n     \* calcula el tamaño de cada trozo o sección\, de acuerdo con el número de secciones para crear\n     \* a través de un número dado de elementos\.\n     \*\n     \* \@param nChunks El número de secciones \(chunks\) para crear\n     \* \@param nElements El número de elementos para dividir\n     \* \@return El tamaño por defecto de la sección \(chunk\)\n     \*\/\n    private static int getChunkSize\(final int nChunks\, final int nElements\) \{\n        \/\/ Función techo entera\n        return \(nElements \+ nChunks \- 1\) \/ nChunks\;\n    \}\n\n    \/\*\*\n     \* Calcula el índice del elemento inclusivo donde la sección\/trozo \(chunk\) inicia\,\n     \* dado que hay cierto número de secciones\/trozos \(chunks\)\.\n     \*\n     \* \@param chunk la sección\/trozo \(chunk\) para cacular la posición de inicio\n     \* \@param nChunks Cantidad de seciiones\/trozos \(chunks\) creados\n     \* \@param nElements La cantidad de elementos de la sección\/trozo que debe atravesarse\n     \* \@return El indice inclusivo donde esta sección\/trozo \(chunk\) inicia en el conjunto de\n     \*         nElements\n     \*\/\n    private static int getChunkStartInclusive\(final int chunk\,\n                                              final int nChunks\, final int nElements\) \{\n        final int chunkSize \= getChunkSize\(nChunks\, nElements\)\;\n        return chunk \* chunkSize\;\n    \}\n\n    \/\*\*\n     \* Calcula el índice del elemento exclusivo que es proporcionado al final de la sección\/trozo \(chunk\)\,\n     \* dado que hay cierto número de secciones\/trozos \(chunks\)\.\n     \*\n     \* \@param chunk LA sección para calcular donde termina\n     \* \@param nChunks Cantidad de seciiones\/trozos \(chunks\) creados\n     \* \@param nElements La cantidad de elementos de la sección\/trozo que debe atravesarse\n     \* \@return El índice de terminación exclusivo para esta sección\/trozo \(chunk\)\n     \*\/\n    private static int getChunkEndExclusive\(final int chunk\, final int nChunks\,\n                                            final int nElements\) \{\n        final int chunkSize \= getChunkSize\(nChunks\, nElements\)\;\n        final int end \= \(chunk \+ 1\) \* chunkSize\;\n        if \(end \&gt; nElements\) \{\n            return nElements\;\n        \} else \{\n            return end\;\n        \}\n    \}\n\n    \/\*\*\n     \* Este pedazo de clase puede ser completada para para implementar el cuerpo de cada tarea creada\n     \* para realizar la suma de los recíprocos del arreglo en paralelo\.\n     \*\/\n    private static class ReciprocalArraySumTask extends RecursiveAction \{\n        \/\*\*\n         \* Iniciar el índice para el recorrido transversal hecho por esta tarea\.\n         \*\/\n        private final int startIndexInclusive\;\n        \/\*\*\n         \* Concluir el índice para el recorrido transversal hecho por esta tarea\.\n         \*\/\n        private final int endIndexExclusive\;\n        \/\*\*\n         \* Arreglo de entrada para la suma de recíprocos\.\n         \*\/\n        private final double\[\] input\;\n        \/\*\*\n         \* Valor intermedio producido por esta tarea\.\n         \*\/\n        private double value\;\n\n        \/\*\*\n         \* Constructor\.\n         \* \@param setStartIndexInclusive establece el indice inicial para comenzar\n         \*        el recorrido trasversal\.\n         \* \@param setEndIndexExclusive establece el indice final para el recorrido trasversal\.\n         \* \@param setInput Valores de entrada\n         \*\/\n        ReciprocalArraySumTask\(final int setStartIndexInclusive\,\n                               final int setEndIndexExclusive\, final double\[\] setInput\) \{\n            this\.startIndexInclusive \= setStartIndexInclusive\;\n            this\.endIndexExclusive \= setEndIndexExclusive\;\n            this\.input \= setInput\;\n        \}\n\n        \/\*\*\n         \* Adquiere el valor producido por esta tarea\.\n         \* \@return El valor producido por esta tarea\n         \*\/\n        public double getValue\(\) \{\n            return value\;\n        \}\n\n        \@Override\n        protected void compute\(\) \{\n            \/\/ Para hacer\n            if\( input\.length \&lt; 2 \)\{\n                parArraySum\(input\)\;\n            \} else \{\n                int n \= input\.length\;\n                int mid \= \(n\-1\)\/2\;\n                double arr1\[\] \= Arrays\.copyOfRange\(input\, 0\, mid\)\;\n                double arr2\[\] \= Arrays\.copyOfRange\(input\, mid\, n\)\;\n\n                ReciprocalArraySumTask sum1 \= new ReciprocalArraySumTask\(0\, 0\, arr1 \)\;\n                ReciprocalArraySumTask sum2 \= new ReciprocalArraySumTask\(0\, 0\, arr2 \)\;\n\n                invokeAll\( sum1\, sum2 \)\;\n            \}\n        \}\n    \}\n\n    \/\*\*\n     \* Para hacer\: Modificar este método para calcular la misma suma de recíprocos como le realizada en\n     \* seqArraySum\, pero utilizando dos tareas ejecutándose en paralelo dentro del framework ForkJoin de Java\n     \* Se puede asumir que el largo del arreglo de entrada\n     \* es igualmente divisible por 2\.\n     \*\n     \* \@param input Arreglo de entrada\n     \* \@return La suma de los recíprocos del arreglo de entrada\n     \*\/\n    protected static double parArraySum\(final double\[\] input\) \{\n        assert input\.length \% 2 \=\= 0\;\n\n        double sum \= 0\;\n\n        \/\/ Calcula la suma de los recíprocos de los elementos del arreglo\n        for \(int i \= 0\; i \&lt; input\.length\; i\+\+\) \{\n            sum \+\= 1 \/ input\[i\]\;\n        \}\n\n        return sum\;\n    \}\n\n    \/\*\*\n     \* Para hacer\: extender el trabajo hecho para implementar parArraySum que permita utilizar un número establecido\n     \* de tareas para calcular la suma del arreglo recíproco\.\n     \* getChunkStartInclusive y getChunkEndExclusive pueden ser útiles para cacular\n     \* el rango de elementos indice que pertenecen a cada sección\/trozo \(chunk\)\.\n     \*\n     \* \@param input Arreglo de entrada\n     \* \@param numTasks El número de tareas para crear\n     \* \@return La suma de los recíprocos del arreglo de entrada\n     \*\/\n    protected static double parManyTaskArraySum\(final double\[\] input\,\n                                                final int numTasks\) \{\n        double sum \= 0\;\n\n        \/\/ Calcula la suma de los recíprocos de los elementos del arreglo\n        for \(int i \= 0\; i \&lt; input\.length\; i\+\+\) \{\n            sum \+\= 1 \/ input\[i\]\;\n        \}\n\n        return sum\;\n    \}\n\n    public static void main \(String args\[\]\)\{\n        System\.out\.println\(\&quot;Test\&quot;\)\;\n        double\[\] input \= \{1\,2\,3\,4\}\;\n        System\.out\.println\(Arrays\.toString\(input\)\)\;\n        ForkJoinPool pool \= new ForkJoinPool\(\)\;\n        ReciprocalArraySumTask sum \= new ReciprocalArraySumTask\(0\,0\, input\)\;\n        pool\.invoke\( sum \)\;\n    \}\n\}|import java\.util\.Arrays\;\nimport java\.util\.concurrent\.ForkJoinPool\;\nimport java\.util\.concurrent\.RecursiveAction\;\n\n\/\*\*\n \* Clase que contiene los métodos para implementar la suma de los recíprocos de un arreglo usando paralelismo\.\n \*\/\npublic final class ReciprocalArraySum \{\n\n    \/\*\*\n     \* Constructor\.\n     \*\/\n    private ReciprocalArraySum\(\) \{\n    \}\n\n    \/\*\*\n     \* Calcula secuencialmente la suma de valores recíprocos para un arreglo\.\n     \*\n     \* \@param input Arreglo de entrada\n     \* \@return La suma de los recíprocos del arreglo de entrada\n     \*\/\n    protected static double seqArraySum\(final double\[\] input\) \{\n        double sum \= 0\;\n\n        \/\/ Calcula la suma de los recíprocos de los elementos del arreglo\n        for \(int i \= 0\; i \&lt; input\.length\; i\+\+\) \{\n            sum \+\= 1 \/ input\[i\]\;\n        \}\n\n        return sum\;\n    \}\n\n    \/\*\*\n     \* calcula el tamaño de cada trozo o sección\, de acuerdo con el número de secciones para crear\n     \* a través de un número dado de elementos\.\n     \*\n     \* \@param nChunks El número de secciones \(chunks\) para crear\n     \* \@param nElements El número de elementos para dividir\n     \* \@return El tamaño por defecto de la sección \(chunk\)\n     \*\/\n    private static int getChunkSize\(final int nChunks\, final int nElements\) \{\n        \/\/ Función techo entera\n        return \(nElements \+ nChunks \- 1\) \/ nChunks\;\n    \}\n\n    \/\*\*\n     \* Calcula el índice del elemento inclusivo donde la sección\/trozo \(chunk\) inicia\,\n     \* dado que hay cierto número de secciones\/trozos \(chunks\)\.\n     \*\n     \* \@param chunk la sección\/trozo \(chunk\) para cacular la posición de inicio\n     \* \@param nChunks Cantidad de seciiones\/trozos \(chunks\) creados\n     \* \@param nElements La cantidad de elementos de la sección\/trozo que debe atravesarse\n     \* \@return El indice inclusivo donde esta sección\/trozo \(chunk\) inicia en el conjunto de\n     \*         nElements\n     \*\/\n    private static int getChunkStartInclusive\(final int chunk\,\n                                              final int nChunks\, final int nElements\) \{\n        final int chunkSize \= getChunkSize\(nChunks\, nElements\)\;\n        return chunk \* chunkSize\;\n    \}\n\n    \/\*\*\n     \* Calcula el índice del elemento exclusivo que es proporcionado al final de la sección\/trozo \(chunk\)\,\n     \* dado que hay cierto número de secciones\/trozos \(chunks\)\.\n     \*\n     \* \@param chunk LA sección para calcular donde termina\n     \* \@param nChunks Cantidad de seciiones\/trozos \(chunks\) creados\n     \* \@param nElements La cantidad de elementos de la sección\/trozo que debe atravesarse\n     \* \@return El índice de terminación exclusivo para esta sección\/trozo \(chunk\)\n     \*\/\n    private static int getChunkEndExclusive\(final int chunk\, final int nChunks\,\n                                            final int nElements\) \{\n        final int chunkSize \= getChunkSize\(nChunks\, nElements\)\;\n        final int end \= \(chunk \+ 1\) \* chunkSize\;\n        if \(end \&gt; nElements\) \{\n            return nElements\;\n        \} else \{\n            return end\;\n        \}\n    \}\n\n    \/\*\*\n     \* Este pedazo de clase puede ser completada para para implementar el cuerpo de cada tarea creada\n     \* para realizar la suma de los recíprocos del arreglo en paralelo\.\n     \*\/\n    private static class ReciprocalArraySumTask extends RecursiveAction \{\n        \/\*\*\n         \* Iniciar el índice para el recorrido transversal hecho por esta tarea\.\n         \*\/\n        private final int startIndexInclusive\;\n        \/\*\*\n         \* Concluir el índice para el recorrido transversal hecho por esta tarea\.\n         \*\/\n        private final int endIndexExclusive\;\n        \/\*\*\n         \* Arreglo de entrada para la suma de recíprocos\.\n         \*\/\n        private final double\[\] input\;\n        \/\*\*\n         \* Valor intermedio producido por esta tarea\.\n         \*\/\n        private double value\;\n\n        \/\*\*\n         \* Constructor\.\n         \* \@param setStartIndexInclusive establece el indice inicial para comenzar\n         \*        el recorrido trasversal\.\n         \* \@param setEndIndexExclusive establece el indice final para el recorrido trasversal\.\n         \* \@param setInput Valores de entrada\n         \*\/\n        ReciprocalArraySumTask\(final int setStartIndexInclusive\,\n                               final int setEndIndexExclusive\, final double\[\] setInput\) \{\n            this\.startIndexInclusive \= setStartIndexInclusive\;\n            this\.endIndexExclusive \= setEndIndexExclusive\;\n            this\.input \= setInput\;\n        \}\n\n        \/\*\*\n         \* Adquiere el valor producido por esta tarea\.\n         \* \@return El valor producido por esta tarea\n         \*\/\n        public double getValue\(\) \{\n            return value\;\n        \}\n\n        \@Override\n        protected void compute\(\) \{\n            \/\/ Para hacer\n            if\( input\.length \&lt; 2 \)\{\n                parArraySum\(input\)\;\n            \} else \{\n                int n \= input\.length\;\n                int mid \= \(n\-1\)\/2\;\n                double arr1\[\] \= Arrays\.copyOfRange\(input\, 0\, mid\)\;\n                double arr2\[\] \= Arrays\.copyOfRange\(input\, mid\, n\)\;\n\n                ReciprocalArraySumTask sum1 \= new ReciprocalArraySumTask\(0\, 0\, arr1 \)\;\n                ReciprocalArraySumTask sum2 \= new ReciprocalArraySumTask\(0\, 0\, arr2 \)\;\n\n                invokeAll\( sum1\, sum2 \)\;\n            \}\n        \}\n    \}\n\n    \/\*\*\n     \* Para hacer\: Modificar este método para calcular la misma suma de recíprocos como le realizada en\n     \* seqArraySum\, pero utilizando dos tareas ejecutándose en paralelo dentro del framework ForkJoin de Java\n     \* Se puede asumir que el largo del arreglo de entrada\n     \* es igualmente divisible por 2\.\n     \*\n     \* \@param input Arreglo de entrada\n     \* \@return La suma de los recíprocos del arreglo de entrada\n     \*\/\n    protected static double parArraySum\(final double\[\] input\) \{\n        assert input\.length \% 2 \=\= 0\;\n\n        double sum \= 0\;\n\n        \/\/ Calcula la suma de los recíprocos de los elementos del arreglo\n        for \(int i \= 0\; i \&lt; input\.length\; i\+\+\) \{\n            sum \+\= 1 \/ input\[i\]\;\n        \}\n\n        return sum\;\n    \}\n\n    \/\*\*\n     \* Para hacer\: extender el trabajo hecho para implementar parArraySum que permita utilizar un número establecido\n     \* de tareas para calcular la suma del arreglo recíproco\.\n     \* getChunkStartInclusive y getChunkEndExclusive pueden ser útiles para cacular\n     \* el rango de elementos indice que pertenecen a cada sección\/trozo \(chunk\)\.\n     \*\n     \* \@param input Arreglo de entrada\n     \* \@param numTasks El número de tareas para crear\n     \* \@return La suma de los recíprocos del arreglo de entrada\n     \*\/\n    protected static double parManyTaskArraySum\(final double\[\] input\,\n                                                final int numTasks\) \{\n        double sum \= 0\;\n\n        \/\/ Calcula la suma de los recíprocos de los elementos del arreglo\n        for \(int i \= 0\; i \&lt; input\.length\; i\+\+\) \{\n            sum \+\= 1 \/ input\[i\]\;\n        \}\n\n        return sum\;\n    \}\n\n    public static void main \(String args\[\]\)\{\n        System\.out\.println\(\&quot;Test\&quot;\)\;\n        double\[\] input \= \{1\,2\,3\,4\}\;\n        System\.out\.println\(Arrays\.toString\(input\)\)\;\n        ForkJoinPool pool \= new ForkJoinPool\(\)\;\n        ReciprocalArraySumTask sum \= new ReciprocalArraySumTask\(0\,0\, input\)\;\n        pool\.invoke\( sum \)\;\n    \}\n\}</find>
+    </findStrings>
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/util" />
+        <option value="$PROJECT_DIR$/src/ReciprocalArraySumTest.java" />
+        <option value="$PROJECT_DIR$/src/ReciprocalArraySum.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="14" />
+    <option name="y" value="20" />
+    <option name="width" value="1336" />
+    <option name="height" value="703" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ejercicio1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ejercicio1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ejercicio1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ejercicio1" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.ReciprocalArraySum">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+    </configuration>
+    <configuration name="ReciprocalArraySum" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="ReciprocalArraySum" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="ejercicio1" />
+      <envs />
+    </configuration>
+    <configuration name="ReciprocalArraySumTest" type="Application" factoryName="Application" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="ReciprocalArraySumTest" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="ejercicio1" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+    </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Application.ReciprocalArraySumTest" />
+      <item index="1" class="java.lang.String" itemvalue="Application.ReciprocalArraySum" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Application.ReciprocalArraySum" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SbtLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="80b40a67-aa50-4c0c-80c4-35aa90003794" name="Default" comment="" />
+      <created>1519099062422</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1519099062422</updated>
+      <workItem from="1519099064757" duration="9283000" />
+      <workItem from="1519130260404" duration="4011000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="13294000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="14" y="20" width="1366" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32792208" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29383117" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1219697" sideWeight="0.49195403" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1219697" sideWeight="0.508046" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/ReciprocalArraySum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3451">
+          <caret line="207" column="10" lean-forward="false" selection-start-line="207" selection-start-column="10" selection-end-line="207" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4921#4922#0" expanded="true" />
+            <element signature="e#4957#4958#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2907">
+          <caret line="171" column="6" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ReciprocalArraySumTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#512#513#0" expanded="true" />
+            <element signature="e#544#545#0" expanded="true" />
+            <element signature="e#574#575#0" expanded="true" />
+            <element signature="e#600#601#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/util/concurrent/RecursiveAction.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/io/PrintStream.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="367" column="0" lean-forward="false" selection-start-line="367" selection-start-column="0" selection-end-line="367" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="173" column="36" lean-forward="false" selection-start-line="173" selection-start-column="36" selection-end-line="173" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ReciprocalArraySumTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="34" column="38" lean-forward="true" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#512#513#0" expanded="true" />
+            <element signature="e#544#545#0" expanded="true" />
+            <element signature="e#574#575#0" expanded="true" />
+            <element signature="e#600#601#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ReciprocalArraySum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1530">
+          <caret line="90" column="46" lean-forward="false" selection-start-line="90" selection-start-column="46" selection-end-line="90" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4921#4922#0" expanded="true" />
+            <element signature="e#4957#4958#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
